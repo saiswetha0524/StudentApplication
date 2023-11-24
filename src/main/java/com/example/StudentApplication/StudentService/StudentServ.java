@@ -1,11 +1,10 @@
-package StudentService;
+package com.example.StudentApplication.StudentService;
 
-import StudentEntity.Student;
-import StudentRepository.StudentRepo;
+import com.example.StudentApplication.StudentEntity.Student;
+import com.example.StudentApplication.StudentRepository.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +26,7 @@ public class StudentServ {
     }
 
     public void deleteStudent(int stud_id){
-        studentRepo.deleteAllById(Collections.singleton(stud_id));
+        studentRepo.deleteById(stud_id);
     }
 
     public void deleteAllStudents(){

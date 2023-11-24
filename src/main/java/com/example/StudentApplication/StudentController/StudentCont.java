@@ -1,8 +1,8 @@
-package StudentController;
+package com.example.StudentApplication.StudentController;
 
-import StudentEntity.Student;
-import StudentRepository.StudentRepo;
-import StudentService.StudentServ;
+import com.example.StudentApplication.StudentEntity.Student;
+import com.example.StudentApplication.StudentRepository.StudentRepo;
+import com.example.StudentApplication.StudentService.StudentServ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +28,9 @@ public class StudentCont {
         return studentServ.findall();
     }
 
-    @GetMapping("/{id}")
-    public Optional<Student> getStudentById(@PathVariable int stud_id){
-        return Optional.of(studentServ.findById(stud_id).get());
+    @GetMapping("/{stud_id}")
+    public Student getStudentById(@PathVariable int stud_id){
+        return studentServ.findById(stud_id).get();
     }
 
     @PostMapping("/")
@@ -38,7 +38,7 @@ public class StudentCont {
         return studentServ.addStudent(stud);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{stud_id}")
     public void removeStudent(@PathVariable int stud_id){
         studentServ.deleteStudent(stud_id);
     }
