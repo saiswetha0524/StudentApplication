@@ -1,10 +1,9 @@
-package com.example.StudentApplication.StudentEntity;
+package com.example.StudentApplication.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 @Entity

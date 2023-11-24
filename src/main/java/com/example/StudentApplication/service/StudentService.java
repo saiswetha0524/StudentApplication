@@ -1,7 +1,7 @@
-package com.example.StudentApplication.StudentService;
+package com.example.StudentApplication.service;
 
-import com.example.StudentApplication.StudentEntity.Student;
-import com.example.StudentApplication.StudentRepository.StudentRepo;
+import com.example.StudentApplication.entities.Student;
+import com.example.StudentApplication.repo.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StudentServ {
+public class StudentService {
     @Autowired
     StudentRepo studentRepo;
 
