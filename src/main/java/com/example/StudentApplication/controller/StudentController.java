@@ -23,40 +23,33 @@ public class StudentController {
 
     @GetMapping("/hi")
     public String hello() {
-
         return serviceHelper.helloMethod();
     }
 
     @GetMapping("/")
     public APIResponse<List<Student>> getAllStudents() {
-
         return serviceHelper.findall();
     }
 
     //TODO: Implement RESPONSE return type to all the endpoints
 
     @GetMapping("/{stud_id}")
-
     public ResponseEntity<APIResponse<Student>> getStudentById(@PathVariable int stud_id) {
-
         return serviceHelper.findById(stud_id);
     }
 
     @PostMapping("/")
     public APIResponse<Student> addStudent(@RequestBody Student stud) {
-
         return serviceHelper.addStudent(stud);
     }
 
     @DeleteMapping("/{stud_id}")
     public APIResponse<Student> removeStudent(@PathVariable int stud_id) {
-
         return serviceHelper.deleteStudent(stud_id);
     }
 
     @DeleteMapping("/")
     public APIResponse<Student> removeAllStudents() {
-
         return serviceHelper.deleteAllStudents();
     }
 }

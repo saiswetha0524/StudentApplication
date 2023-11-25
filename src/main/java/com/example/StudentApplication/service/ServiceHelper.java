@@ -26,7 +26,7 @@ public class ServiceHelper {
         APIResponse<List<Student>> apiResponse = new APIResponse<>();
         apiResponse.setStatus(StatusEnum.SUCCESS);
         apiResponse.setMessage("List of student successfully fetched");
-        apiResponse.setResponse(studentService.findall());
+        apiResponse.setResponse(studentService.findAll());
         return apiResponse;
 
     }
