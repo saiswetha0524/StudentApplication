@@ -14,22 +14,27 @@ public class StudentService {
     StudentRepo studentRepo;
 
     public List<Student> findall(){
+
         return studentRepo.findAll();
     }
 
     public Optional<Student> findById(int stud_id){
+
         return studentRepo.findById(stud_id);
     }
 
     public Student addStudent(Student student){
-       return studentRepo.save(student);
+
+        return studentRepo.save(student);
     }
 
-    public void deleteStudent(int stud_id){
-        studentRepo.deleteById(stud_id);
+    public Student deleteStudent(int stud_id){
+         studentRepo.deleteById(stud_id);
+        return null;
     }
 
-    public void deleteAllStudents(){
+    public Student deleteAllStudents(){
         studentRepo.deleteAll();
+        return null;
     }
 }

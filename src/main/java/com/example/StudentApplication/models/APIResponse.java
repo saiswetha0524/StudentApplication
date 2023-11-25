@@ -15,10 +15,9 @@ public class APIResponse<E>  {
 
     private StatusEnum status;
 
+    private String message;
 
     private E response;
-
-    private String message;
 
     private HttpStatus httpStatus;
 
