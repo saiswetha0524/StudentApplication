@@ -31,7 +31,7 @@ public class ServiceHelper {
 
     }
 
-    public ResponseEntity<APIResponse<Student>> findById(int stud_id){
+    public APIResponse<Student> findById(int stud_id){
 
         Optional<Student> studentIdOptional = studentService.findById(stud_id);
         APIResponse<Student> apiResponse = new APIResponse<>();
@@ -43,7 +43,7 @@ public class ServiceHelper {
             apiResponse.setStatus(StatusEnum.FAILURE);
             apiResponse.setMessage("Student with id - " +stud_id +" details can't be found:");
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
+        return apiResponse;
     }
 
     public APIResponse<Student> addStudent(Student student){
