@@ -23,8 +23,6 @@ public class APIResponse<E>  {
 
     private java.util.List<Student> students;
 
-
-
    // private Object List<Student>;
 
  //   private String simple;

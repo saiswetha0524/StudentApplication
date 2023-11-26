@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 @RestController
 @RequestMapping(path = "/studentDetails")
 public class StudentController {
-
     @Autowired
     ServiceHelper serviceHelper;
 
@@ -35,13 +33,10 @@ public class StudentController {
 
     @GetMapping("/{stud_id}")
     public ResponseEntity<APIResponse<Student>> getStudentById(@PathVariable int stud_id) {
-      /* Optional<ResponseEntity<APIResponse<Student>>> newOptional= this.getStudentById(stud_id);
 
-        if (newOptional.isPresent()) {
-
+        if(serviceHelper.findById(stud_id).getStatus()==StatusEnum.SUCCESS){
             return ResponseEntity.status(HttpStatus.OK).body(serviceHelper.findById(stud_id));
         }
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(serviceHelper.findById(stud_id));*/
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(serviceHelper.findById(stud_id));
     }
 

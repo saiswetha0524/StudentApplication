@@ -4,8 +4,7 @@ import com.example.StudentApplication.entities.Student;
 import com.example.StudentApplication.models.APIResponse;
 import com.example.StudentApplication.models.StatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,7 +12,6 @@ import java.util.Optional;
 
 @Component
 public class ServiceHelper {
-
     @Autowired
     StudentService studentService;
 
@@ -52,7 +50,8 @@ public class ServiceHelper {
         apiResponse.setResponse(studentService.addStudent(student));
         apiResponse.setMessage("Inserted Successfully");
         apiResponse.setStatus(StatusEnum.SUCCESS);
-        return apiResponse;    }
+        return apiResponse;
+    }
 
     public APIResponse<Student> deleteStudent(int stud_id){
 
@@ -72,6 +71,4 @@ public class ServiceHelper {
         return apiResponse;
 
     }
-
-
 }
