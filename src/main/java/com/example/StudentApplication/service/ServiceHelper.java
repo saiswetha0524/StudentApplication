@@ -30,7 +30,7 @@ public class ServiceHelper {
     }
 
     public APIResponse<Student> findById(int stud_id){
-
+        //TODO: check if the repo response is null, if so throw custom not found exception
         Optional<Student> studentIdOptional = studentService.findById(stud_id);
         APIResponse<Student> apiResponse = new APIResponse<>();
         if (studentIdOptional.isPresent()) {
@@ -40,6 +40,7 @@ public class ServiceHelper {
         } else {
             apiResponse.setStatus(StatusEnum.FAILURE);
             apiResponse.setMessage("Student with id - " +stud_id +" details can't be found:");
+            //TODO: Throw a exception
         }
         return apiResponse;
     }

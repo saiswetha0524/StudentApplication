@@ -33,7 +33,9 @@ public class StudentController {
 
     @GetMapping("/{stud_id}")
     public ResponseEntity<APIResponse<Student>> getStudentById(@PathVariable int stud_id) {
+        //TODO: Make one variable.
 
+        //TODO: handle the thrown exception from findById
         if(serviceHelper.findById(stud_id).getStatus()==StatusEnum.SUCCESS){
             return ResponseEntity.status(HttpStatus.OK).body(serviceHelper.findById(stud_id));
         }
