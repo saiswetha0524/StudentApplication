@@ -28,7 +28,19 @@ public class StudentController {
 
     @GetMapping("/")
     public ResponseEntity<APIResponse<List<Student>>> getAllStudents() {
-        return ResponseEntity.status(HttpStatus.OK).body(serviceHelper.findall());
+        APIResponse<List<Student>> apiResponse = new APIResponse<>();
+
+        try {
+            apiResponse = serviceHelper.findall();
+        } catch (CustomNotFoundException c) {
+            apiResponse.setMessage(c.getMessage());
+            apiResponse.setStatus(StatusEnum.FAILURE);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiResponse);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+     // return ResponseEntity.status(HttpStatus.OK).body(serviceHelper.findall());
     }
 
     @GetMapping("/{stud_id}")
@@ -48,9 +60,9 @@ public class StudentController {
              apiResponse.setMessage(c.getMessage());
             apiResponse.setStatus(StatusEnum.FAILURE);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
-        } /*catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiResponse);
-        }*/
+        }
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 

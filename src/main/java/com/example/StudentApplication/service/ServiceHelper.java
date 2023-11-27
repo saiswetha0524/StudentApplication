@@ -22,13 +22,17 @@ public class ServiceHelper {
     }
 
     public APIResponse<List<Student>> findall() {
-
         APIResponse<List<Student>> apiResponse = new APIResponse<>();
-        apiResponse.setStatus(StatusEnum.SUCCESS);
-        apiResponse.setMessage("List of student successfully fetched");
-        apiResponse.setResponse(studentService.findAll());
-        return apiResponse;
+        Optional<List<Student>> findAllOptional = studentService.findAll();
 
+            if (!findAllOptional.isEmpty()) {
+                apiResponse.setMessage("List of students successfully fetched");
+                apiResponse.setResponse(findAllOptional.get());
+                apiResponse.setStatus(StatusEnum.SUCCESS);
+            } else {
+                throw new CustomNotFoundException("List not found, kindly feed in values");
+            }
+        return apiResponse;
     }
 
     public APIResponse<Student> findById(int stud_id) {

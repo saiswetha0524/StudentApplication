@@ -13,8 +13,8 @@ public class StudentService {
     @Autowired
     StudentRepo studentRepo;
 
-    public List<Student> findAll() {
-        return studentRepo.findAll();
+    public Optional<List<Student>> findAll() {
+        return Optional.of(studentRepo.findAll());
     }
 
     public Optional<Student> findById(int stud_id) {
