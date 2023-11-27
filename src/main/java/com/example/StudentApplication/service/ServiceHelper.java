@@ -1,12 +1,14 @@
 package com.example.StudentApplication.service;
 
 import com.example.StudentApplication.entities.Student;
+import com.example.StudentApplication.exception.CustomNotFoundException;
 import com.example.StudentApplication.models.APIResponse;
 import com.example.StudentApplication.models.StatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +21,7 @@ public class ServiceHelper {
         return "hello!";
     }
 
-    public APIResponse<List<Student>> findall(){
+    public APIResponse<List<Student>> findall() {
 
         APIResponse<List<Student>> apiResponse = new APIResponse<>();
         apiResponse.setStatus(StatusEnum.SUCCESS);
@@ -29,21 +31,22 @@ public class ServiceHelper {
 
     }
 
-    public APIResponse<Student> findById(int stud_id){
+    public APIResponse<Student> findById(int stud_id) {
         //TODO: check if the repo response is null, if so throw custom not found exception
         Optional<Student> studentIdOptional = studentService.findById(stud_id);
         APIResponse<Student> apiResponse = new APIResponse<>();
         if (studentIdOptional.isPresent()) {
-            apiResponse.setMessage("Student with id - " +stud_id +" details are listed below:");
+            apiResponse.setMessage("Student with id - " + stud_id + " details are listed below:");
             apiResponse.setResponse(studentIdOptional.get());
             apiResponse.setStatus(StatusEnum.SUCCESS);
         } else {
-            apiResponse.setStatus(StatusEnum.FAILURE);
-            apiResponse.setMessage("Student with id - " +stud_id +" details can't be found:");
+           /* apiResponse.setStatus(StatusEnum.FAILURE);
+            apiResponse.setMessage("Student with id - " +stud_id +" details can't be found:");*/
+            throw new CustomNotFoundException("Student with id - " + stud_id + " details can't be found:");
             //TODO: Throw a exception
         }
         return apiResponse;
-    }
+}
 
     public APIResponse<Student> addStudent(Student student){
 

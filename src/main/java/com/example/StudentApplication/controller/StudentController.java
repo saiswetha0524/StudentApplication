@@ -1,6 +1,7 @@
 package com.example.StudentApplication.controller;
 
 import com.example.StudentApplication.entities.Student;
+import com.example.StudentApplication.exception.CustomNotFoundException;
 import com.example.StudentApplication.models.APIResponse;
 import com.example.StudentApplication.models.StatusEnum;
 import com.example.StudentApplication.repo.StudentRepo;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
 @RestController
 @RequestMapping(path = "/studentDetails")
 public class StudentController {
@@ -25,21 +27,31 @@ public class StudentController {
     }
 
     @GetMapping("/")
-    public  ResponseEntity<APIResponse<List<Student>>> getAllStudents() {
+    public ResponseEntity<APIResponse<List<Student>>> getAllStudents() {
         return ResponseEntity.status(HttpStatus.OK).body(serviceHelper.findall());
     }
-
-    //TODO: Implement RESPONSE return type to all the endpoints
 
     @GetMapping("/{stud_id}")
     public ResponseEntity<APIResponse<Student>> getStudentById(@PathVariable int stud_id) {
         //TODO: Make one variable.
+        /*if (apiResponse.getStatus() == StatusEnum.SUCCESS) {
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+        }else
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);*/
 
         //TODO: handle the thrown exception from findById
-        if(serviceHelper.findById(stud_id).getStatus()==StatusEnum.SUCCESS){
-            return ResponseEntity.status(HttpStatus.OK).body(serviceHelper.findById(stud_id));
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(serviceHelper.findById(stud_id));
+        APIResponse<Student> apiResponse = new APIResponse<>();
+
+        try {
+            apiResponse = serviceHelper.findById(stud_id);
+        } catch (CustomNotFoundException c) {
+             apiResponse.setMessage(c.getMessage());
+            apiResponse.setStatus(StatusEnum.FAILURE);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
+        } /*catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiResponse);
+        }*/
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
 

@@ -19,10 +19,6 @@ public class APIResponse<E>  {
 
     private E response;
 
-    private HttpStatus httpStatus;
-
-    private java.util.List<Student> students;
-
    // private Object List<Student>;
 
  //   private String simple;
