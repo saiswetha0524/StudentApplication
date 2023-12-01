@@ -13,12 +13,19 @@ public class StudentService {
     @Autowired
     StudentRepo studentRepo;
 
-    public List<Student> findAll() {
-        return studentRepo.findAll();
+    public Optional<List<Student>> findAll() {
+        return Optional.of(studentRepo.findAll());
     }
 
     public Optional<Student> findById(int stud_id) {
         return studentRepo.findById(stud_id);
+    }
+   /* public Optional<Student> findByDept(String dept) {
+        return studentRepo.findByStud_dept(dept);
+    }*/
+
+    public Optional<Student> findByStud_name(String name) {
+        return studentRepo.findByName(name);
     }
 
     public Student addStudent(Student student) {
@@ -30,8 +37,12 @@ public class StudentService {
         return null;
     }
 
-    public Student deleteAllStudents() {
+    public void deleteAllStudents() {
         studentRepo.deleteAll();
-        return null;
+    }
+
+
+    public long countStudents() {
+        return studentRepo.countBy();
     }
 }

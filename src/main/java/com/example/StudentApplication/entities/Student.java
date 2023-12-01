@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int stud_id;
-    private String stud_name;
-    private String stud_dept;
+    private int id;
+    private String name;
+    private String dept;
 }
