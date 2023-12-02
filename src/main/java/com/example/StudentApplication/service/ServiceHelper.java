@@ -1,8 +1,7 @@
 package com.example.StudentApplication.service;
 
 import com.example.StudentApplication.entities.Student;
-import com.example.StudentApplication.exception.StudentNotFoundException;
-import com.example.StudentApplication.exception.StudentAlreadyExistsException;
+import com.example.StudentApplication.exception.*;
 import com.example.StudentApplication.models.APIResponse;
 import com.example.StudentApplication.models.StatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +73,7 @@ public class ServiceHelper {
         Optional<Student> existingDeletedStudentOptional = studentService.findById(stud_id);
         APIResponse<Student> apiResponse = new APIResponse<>();
         if (existingDeletedStudentOptional.isPresent()) {
-            apiResponse.setResponse(studentService.deleteStudent(stud_id));
+            studentService.deleteStudent(stud_id);
             apiResponse.setMessage("Student Deleted Successfully");
             apiResponse.setStatus(StatusEnum.SUCCESS);
         } else {
@@ -83,33 +82,18 @@ public class ServiceHelper {
         return apiResponse;
     }
 
-   /* public APIResponse<Student> deleteAllStudents() {
-
-        Optional<List<Student>> studentOptional = studentService.findAll();
-        APIResponse<Student> apiResponse = new APIResponse<>();
-        if (studentOptional.isPresent()) {
-            List<Student> listStudents = studentOptional.get();
-            if (listStudents.isEmpty()) {
-                throw new StudentNotFoundException("Student table is empty");
-            } else {
-                studentService.deleteAllStudents();
-                apiResponse.setMessage("Students Deleted Successfully");
-                apiResponse.setStatus(StatusEnum.SUCCESS);
-            }
-        }
-        return apiResponse;
-    }*/
-    //directly delete everything, if any exception thrown,
-    // catch(if half record found messge) and handle. if no exception, all record deleted successfully message.
-
     public APIResponse<Student> deleteAllStudents() {
-
+        long remainingCount=countStudents();
         Optional<List<Student>> studentOptional = studentService.findAll();
         APIResponse<Student> apiResponse = new APIResponse<>();
         if (studentOptional.isPresent()) {
             List<Student> listStudents = studentOptional.get();
             if (listStudents.isEmpty()) {
                 throw new StudentNotFoundException("Student table is empty");
+            } else if (remainingCount>0){
+                studentService.deleteAllStudents();
+                apiResponse.setMessage("Partial deletion occurred due to system shut down" +
+                        ". Now remaining students deleted");
             } else {
                 studentService.deleteAllStudents();
                 apiResponse.setMessage("Students Deleted Successfully");

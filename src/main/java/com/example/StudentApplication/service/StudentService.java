@@ -20,9 +20,6 @@ public class StudentService {
     public Optional<Student> findById(int stud_id) {
         return studentRepo.findById(stud_id);
     }
-   /* public Optional<Student> findByDept(String dept) {
-        return studentRepo.findByStud_dept(dept);
-    }*/
 
     public Optional<Student> findByStud_name(String name) {
         return studentRepo.findByName(name);
@@ -32,9 +29,9 @@ public class StudentService {
         return studentRepo.save(student);
     }
 
-    public Student deleteStudent(int stud_id) {
+    public void deleteStudent(int stud_id) {
         studentRepo.deleteById(stud_id);
-        return null;
+
     }
 
     public void deleteAllStudents() {
