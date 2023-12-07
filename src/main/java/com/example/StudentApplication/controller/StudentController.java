@@ -17,9 +17,6 @@ public class StudentController {
     @Autowired
     ServiceHelper serviceHelper;
 
-    @Autowired
-    GlobalExceptionHandler globalExceptionHandler;
-
     @GetMapping("/hi")
     public ResponseEntity<String> hello() {
         return ResponseEntity.status(HttpStatus.OK).body(serviceHelper.helloMethod());

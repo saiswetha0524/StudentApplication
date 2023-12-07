@@ -83,21 +83,21 @@ public class ServiceHelper {
     }
 
     public APIResponse<Student> deleteAllStudents() {
-        long remainingCount=countStudents();
         Optional<List<Student>> studentOptional = studentService.findAll();
         APIResponse<Student> apiResponse = new APIResponse<>();
-        if (studentOptional.isPresent()) {
-            List<Student> listStudents = studentOptional.get();
-            if (listStudents.isEmpty()) {
+        List<Student> listStudents = studentOptional.get();
+
+        if (!listStudents.isEmpty()) {
+            studentService.deleteAllStudents();
+            apiResponse.setMessage("Students Deleted Successfully");
+            apiResponse.setStatus(StatusEnum.SUCCESS);
+        }else{
+            if(listStudents.isEmpty()) {
                 throw new StudentNotFoundException("Student table is empty");
-            } else if (remainingCount>0){
-                studentService.deleteAllStudents();
+            }else{
+                long remainingCount=countStudents();
                 apiResponse.setMessage("Partial deletion occurred due to system shut down" +
-                        ". Now remaining students deleted");
-            } else {
-                studentService.deleteAllStudents();
-                apiResponse.setMessage("Students Deleted Successfully");
-                apiResponse.setStatus(StatusEnum.SUCCESS);
+                        "Remaining data are: " +remainingCount);
             }
         }
         return apiResponse;
