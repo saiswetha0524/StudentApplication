@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class APIError<AE> {
+public class APIError {
 
     private StatusEnum status;
 
     private String errorMessage;
 
-    private AE errorResponse;
+  //  private AE errorResponse;
 
     private String requestURI;
 

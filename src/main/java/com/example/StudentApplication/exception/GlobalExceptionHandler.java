@@ -34,7 +34,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({StudentNotFoundException.class})
     public ResponseEntity<Object> handleStudentNotFoundException(StudentNotFoundException snf, HttpServletRequest request) {
         String requestURI= String.valueOf(request.getRequestURL());
-        APIError<Student> apiErrorResponse = new APIError<>();
+        APIError apiErrorResponse = new APIError();
         apiErrorResponse.setErrorMessage(snf.getMessage());
         apiErrorResponse.setStatus(StatusEnum.FAILURE);
         apiErrorResponse.setRequestURI(requestURI);
@@ -45,7 +45,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({StudentAlreadyExistsException.class})
     public ResponseEntity<Object> handleStudentAlreadyExistsException(StudentAlreadyExistsException sae, HttpServletRequest request) {
         String requestURI= String.valueOf(request.getRequestURL());
-        APIError<Student> apiErrorResponse = new APIError<>();
+        APIError apiErrorResponse = new APIError();
         apiErrorResponse.setErrorMessage(sae.getMessage());
         apiErrorResponse.setStatus(StatusEnum.FAILURE);
         apiErrorResponse.setRequestURI(requestURI);
@@ -56,7 +56,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({StudentsPartiallyDeletedException.class})
     public ResponseEntity<Object> handleStudentsPartiallyDeletedException(StudentsPartiallyDeletedException spde,HttpServletRequest request) {
         String requestURI= String.valueOf(request.getRequestURL());
-        APIError<Student> apiErrorResponse = new APIError<>();
+        APIError apiErrorResponse = new APIError();
         apiErrorResponse.setErrorMessage(spde.getMessage());
         apiErrorResponse.setStatus(StatusEnum.FAILURE);
         apiErrorResponse.setRequestURI(requestURI);
