@@ -1,0 +1,13 @@
+logback.xml file for customisation
+
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%highlight(%-5level) [%d{HH:mm:ss.SSS}] [%thread] %cyan(%logger{15}) - %msg%n%throwable</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
