@@ -9,7 +9,7 @@
     <!--File Appender-->
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>C:\Users\saiswetha.v\IdeaProjects\StudentApplication\logs\application.log</file>
+        <file>C:\Users\saiswetha.v\IdeaProjects\StudentApplication\resources\logs\application.log</file>
         <encoder>
             <pattern>%-5level [%d{HH:mm:ss.SSS}] [%thread] %logger{15}) - %msg%n</pattern>
         </encoder>
