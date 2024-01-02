@@ -23,11 +23,12 @@
     </appender>
 
     <!--Root Logger Configuration-->
-    <root level="Trace">
+    <root level="info">
         <appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT" />
     </root>
-    <root level="debug">
+   <!-- <root level="debug">
         <appender-ref ref="STDOUT" />
 
-    </root>
+    </root>-->
 </configuration>
