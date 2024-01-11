@@ -38,7 +38,7 @@ public class ServiceHelper {
         try{
         logger.info("Executing hello method in servicehelper");
         logger.debug("Additional debug information for helloMethod");
-        return "hello!";
+        return "hello and welcome to my student application!";
     }finally {
             clearMDCContext();
         }
