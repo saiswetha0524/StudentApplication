@@ -1,0 +1,199 @@
+swagger: "2.0"
+info:
+  description: "API for managing student information"
+  version: "1.0.0"
+  title: "Student Application API"
+  contact:
+    name: "Saiswetha"
+    url: "saiswetha0524@gmail.com"
+    email: "abc.com"
+  license:
+    name: "API License"
+    url: "saiswetha0524@gmail.com"
+host: "localhost:9091"
+basePath: /
+paths:
+  /studentDetails/:
+    
+    get:
+      tags:
+        - "Student Details"
+      summary: "Get all students"
+      responses:
+        200:
+          description: "Nice!"
+          schema:
+            $ref: '#/definitions/Student'
+          400:
+            description: "Error happened"
+            schema:
+              $ref: '#/definitions/APIResponse'
+          401:
+            description: "Unauthorized"
+          403:
+            description: "Forbidden"
+          404:
+            description: "Student not found"
+            schema:
+              $ref: '#/definitions/APIResponse'
+          deprecated: "false"
+    post:
+      tags:
+        - "Student Details"
+      summary: "Create a new student"
+      parameters:
+        - name: "student"
+          in: "body"
+          description: "Student object"
+          required: "true"
+          schema:
+            $ref: '#/definitions/Student'
+      responses:
+          200:
+            description: "Nice!"
+            schema:
+              $ref: '#/definitions/Student'
+          201:
+            description: "Created"
+          400:
+            description: "Error happened"
+            schema:
+              $ref: '#/definitions/APIResponse'
+          401:
+            description: "Unauthorized"
+          403:
+            description: "Forbidden"
+          404:
+            description: "Student cant be added/already present"
+            schema:
+              $ref: '#/definitions/APIResponse'
+          deprecated: "false"
+
+    delete:
+      tags:
+        - "Student Details"
+      summary: "Delete every student"
+      responses:
+        200:
+          description: "Nice!"
+          schema:
+            $ref: '#/definitions/Student'
+        204:
+          description: "No Content"
+        400:
+          description: "Error happened"
+          schema:
+            $ref: '#/definitions/APIResponse'
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Student can't be deleted"
+          schema:
+            $ref: '#/definitions/APIResponse'
+        deprecated: "false"
+
+    /studentDetails/count:
+      get:
+        tags:
+          - "Student Details"
+        summary: "Student count"
+        responses:
+          200:
+            description: "Nice!"
+            schema:
+              $ref: '#/definitions/Student'
+          400:
+            description: "Error happened"
+            schema:
+              $ref: '#/definitions/APIResponse'
+          401:
+            description: "Unauthorized"
+          403:
+            description: "Forbidden"
+          404:
+            description: "Students count can't be found"
+            schema:
+              $ref: '#/definitions/APIResponse'
+          deprecated: "false"
+
+    /studentDetails/hi:
+      get:
+        tags:
+          - "Welcome"
+        summary: "Welcome message"
+        responses:
+          '200':
+            description: "Nice!"
+            schema:
+              $ref: '#/definitions/Student'
+          '401':
+            description: "Unauthorized"
+          '403':
+            description: "Forbidden"
+          '404':
+            description: "Not Found"
+        deprecated: "false"
+
+      /studentDetails/{id}:
+        get:
+          tags:
+            - "Student Details"
+          summary: "Find Student with id"
+          parameters:
+            - in: "path"
+              name: "id"
+              description: "id"
+              required: "true"
+              type: "integer"
+              format: "int32"
+          responses:
+            200:
+              description: "Nice!"
+              schema:
+                $ref: '#/definitions/Student'
+            400:
+              description: "Error happened"
+              schema:
+                $ref: '#/definitions/APIResponse'
+            401:
+              description: "Unauthorized"
+            403:
+              description: "Forbidden"
+            404:
+              description: "Students not found"
+              schema:
+                $ref: '#/definitions/APIResponse'
+            deprecated: "false"
+    delete:
+      tags:
+        - "Student Details"
+      summary: "Delete with id"
+      parameters:
+        - in: "path"
+         name: "id"
+          description: "id"
+          required: "true"
+          type: "integer"
+          format: "int32"
+      responses:
+        200:
+          description: "Nice!"
+          schema:
+            $ref: '#/definitions/Student'
+        204:
+          description: "No content"
+        400:
+          description: "Error happened"
+          schema:
+            $ref: '#/definitions/APIResponse'
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Students can't be deleted"
+          schema:
+            $ref: '#/definitions/APIResponse'
+        deprecated: "false"
