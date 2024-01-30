@@ -2,6 +2,13 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.17'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'org.openapi.generator' version '5.2.0'
+}
+
+openApiGenerate {
+	generatorName = 'spring'
+	inputSpec = 'C:\\Users\\saiswetha.v\\IdeaProjects\\StudentApplication\\src\\main\\resources\\SwaggerConfig.yaml'
+	outputDir = 'C:\\Users\\saiswetha.v\\IdeaProjects\\StudentApplication\\build\\generated'
 }
 
 group = 'com.example'
@@ -28,6 +35,8 @@ dependencies {
 	//implementation 'ch.qos.logback:logback-classic:1.2.3'
 	//implementation 'org.springframework.boot:spring-boot-devtools'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'io.springfox:springfox-swagger2:3.0.0'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 	//implementation 'org.springframework.boot:spring-boot-devtools:1.3.0.RELEASE'
 	//implementation 'com.h2database:h2:1.3.148'
 	compileOnly 'org.projectlombok:lombok'
