@@ -1,7 +1,6 @@
 package com.example.StudentApplication.controller;
 
 import com.example.StudentApplication.entities.Student;
-import com.example.StudentApplication.exception.GlobalExceptionHandler;
 import com.example.StudentApplication.models.APIResponse;
 import com.example.StudentApplication.service.ServiceHelper;
 import io.swagger.annotations.ApiOperation;
@@ -13,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -25,6 +24,21 @@ public class StudentController {
     @Autowired
     ServiceHelper serviceHelper;
     private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
+
+    public final RestTemplate restTemplate;
+
+    @Autowired
+    public StudentController(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
+    @GetMapping("/external-site")
+    public String externalSite(){
+        String url="https://dummyjson.com/docs";
+        ResponseEntity<String> responseEntity=restTemplate.getForEntity(url,String.class);
+        return responseEntity.getBody();
+    }
+
 
     @ApiOperation(notes = "Hello method", value = "Welcome message", nickname = "welcome all",
             tags = {"Welcome"} )
